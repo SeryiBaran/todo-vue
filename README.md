@@ -4,7 +4,7 @@
 
 ## Технологии:
 
-- [Bootstrap](http://getbootstrap.com/)
+- [Water.css](https://watercss.kognise.dev/)
 - [Vue.js](https://vuejs.org/)
 
 ## Инструменты:
