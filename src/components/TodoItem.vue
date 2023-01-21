@@ -27,34 +27,35 @@ const handleEditTodo = () => {
 
 <template>
   <div class="card bg-light">
-    <div class="card-body d-grid gap-2">
-      <div class="d-grid gap-2">
-        <button
-          @click="todosStore.remove(props.todo.id)"
-          class="btn btn-danger"
-        >
-          Завершено
-        </button>
-        <button
-          v-on="!isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }"
-          class="btn btn-primary"
-          :class="{ 'btn-success': isEdit }"
-        >
-          {{ !isEdit ? "Изменить" : "Готово" }}
-        </button>
-        <textarea v-if="isEdit" v-model="textAreaValue" class="form-control" />
-        <pre v-else class="contentPre">{{ props.todo.content }}</pre>
-      </div>
-    </div>
+    <button @click="todosStore.remove(props.todo.id)">
+      Завершено
+    </button>
+    <button
+      v-on="!isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }"
+    >
+      {{ !isEdit ? "Изменить" : "Готово" }}
+    </button>
+    <textarea v-if="isEdit" v-model="textAreaValue" />
+    <pre v-else class="contentPre">{{ props.todo.content }}</pre>
   </div>
 </template>
 
 <style scoped>
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+  padding: 6px;
+  border-radius: 6px;
+}
 .contentPre {
   word-wrap: break-word;
   margin: 0;
   padding: 0.5rem;
   font: unset;
   white-space: pre-wrap;
+}
+textarea {
+  border: 1px solid var(--focus);
 }
 </style>

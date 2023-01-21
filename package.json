@@ -8,8 +8,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.6",
-    "bootstrap": "^5.2.3",
     "idb-keyval": "^6.2.0",
     "pinia": "^2.0.29",
     "pinia-plugin-persistedstate-2": "^2.0.9",

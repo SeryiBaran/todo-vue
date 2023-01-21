@@ -5,7 +5,7 @@ import { useTodosStore } from "@/store";
 
 const inputValue = ref("");
 
-const todosStore = useTodosStore()
+const todosStore = useTodosStore();
 
 const handleSubmit = (evt) => {
 	evt.preventDefault();
@@ -16,11 +16,18 @@ const handleSubmit = (evt) => {
 </script>
 
 <template>
-	<form
-		v-on:submit="handleSubmit"
-		class="d-flex gap-2 flex-column flex-sm-row"
-	>
-		<input v-model="inputValue" class="form-control" type="text" />
-		<button class="btn btn-primary" type="submit">Добавить</button>
+	<form v-on:submit="handleSubmit">
+		<input v-model="inputValue" type="text" />
+		<button type="submit">Добавить</button>
 	</form>
 </template>
+
+<style>
+form {
+	display: flex;
+}
+input {
+	display: block;
+	width: 100%;
+}
+</style>

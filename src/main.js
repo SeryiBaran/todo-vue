@@ -2,10 +2,8 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { createPersistedStatePlugin } from "pinia-plugin-persistedstate-2";
 
-import "bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-// Тема Bootswatch Lumen для Bootstrap (https://bootswatch.com/lumen/)
-import "@/bootstrap/bootstrap-lumen.min.css";
+import '@/assets/water.css'
+import '@/assets/main.css'
 
 import App from "./App.vue";
 
