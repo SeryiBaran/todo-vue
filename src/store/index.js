@@ -2,10 +2,8 @@ import { defineStore } from "pinia";
 
 import { generateId } from "@/utils";
 
-const initialValue = [];
-
 export const useTodosStore = defineStore("todos", {
-	state: () => ({ todos: initialValue }),
+	state: () => ({ todos: [] }),
 
 	actions: {
 		create(data) {
