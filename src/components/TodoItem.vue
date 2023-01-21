@@ -40,8 +40,7 @@ const handleEditTodo = () => {
           class="btn btn-primary"
           :class="{ 'btn-success': isEdit }"
         >
-          <template v-if="!isEdit">Изменить</template>
-          <template v-else>Готово</template>
+          {{ !isEdit ? "Изменить" : "Готово" }}
         </button>
         <textarea v-if="isEdit" v-model="textAreaValue" class="form-control" />
         <pre v-else class="contentPre">{{ props.todo.content }}</pre>
