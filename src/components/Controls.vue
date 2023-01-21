@@ -2,6 +2,7 @@
 import { ref } from "vue";
 
 import { useTodosStore } from "@/store";
+import { todoContentIsValid } from "@/utils";
 
 const inputValue = ref("");
 
@@ -18,7 +19,7 @@ const handleSubmit = (evt) => {
 <template>
 	<form v-on:submit="handleSubmit" class="form">
 		<input class="input" v-model="inputValue" type="text" />
-		<button type="submit">Create</button>
+		<button type="submit" :disabled="!todoContentIsValid(inputValue)">Create</button>
 	</form>
 </template>
 

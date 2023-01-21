@@ -14,8 +14,6 @@ const editInputValue = ref(todo.content);
 const isEdit = ref(false);
 
 const handleSaveTodo = () => {
-  if (!todoContentIsValid(editInputValue.value)) return;
-
   isEdit.value = false;
   todosStore.setContent(todo.id, editInputValue.value);
 };
@@ -43,6 +41,7 @@ const toggleCompleted = () => {
       <div class="buttons">
         <button
           v-on="!isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }"
+          :disabled="!todoContentIsValid(editInputValue)"
         >
           {{ !isEdit ? "Edit" : "Done" }}
         </button>
