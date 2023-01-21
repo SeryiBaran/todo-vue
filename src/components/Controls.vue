@@ -8,16 +8,14 @@ const inputValue = ref("");
 
 const todosStore = useTodosStore();
 
-const handleSubmit = (evt) => {
-	evt.preventDefault();
-
+const handleSubmit = () => {
 	todosStore.create({ content: inputValue.value });
 	inputValue.value = "";
 };
 </script>
 
 <template>
-	<form v-on:submit="handleSubmit" class="form">
+	<form @submit.prevent="handleSubmit" class="form">
 		<input class="input" v-model="inputValue" type="text" />
 		<button type="submit" :disabled="!todoContentIsValid(inputValue)">Create</button>
 	</form>
