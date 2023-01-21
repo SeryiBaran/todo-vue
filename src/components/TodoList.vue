@@ -13,6 +13,7 @@ const props = defineProps({
       :todo="todo"
       :key="todo.id"
     />
+    <p v-if="!props.todos.length > 0">ToDo кончились</p>
   </div>
 </template>
 
