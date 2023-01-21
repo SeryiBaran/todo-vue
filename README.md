@@ -1,13 +1,13 @@
 # todo-vue
 
-Как [todo-react](https://github.com/SeryiBaran/todo-vanilla), только Vue =)))
+As [todo-react](https://github.com/SeryiBaran/todo-vanilla), but Vue =)))
 
-## Технологии:
+## Technologies:
 
 - [Water.css](https://watercss.kognise.dev/)
 - [Vue.js](https://vuejs.org/)
 
-## Инструменты:
+## Tools:
 
 - [Vite.js](https://vitejs.dev/)
 - [Prettier](https://prettier.io/)

@@ -1,0 +1,7 @@
+label {
+	cursor: pointer;
+}
+
+textarea {
+  border: 1px solid var(--focus);
+}

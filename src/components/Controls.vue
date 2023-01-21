@@ -16,18 +16,24 @@ const handleSubmit = (evt) => {
 </script>
 
 <template>
-	<form v-on:submit="handleSubmit">
-		<input v-model="inputValue" type="text" />
-		<button type="submit">Добавить</button>
+	<form v-on:submit="handleSubmit" class="form">
+		<input class="input" v-model="inputValue" type="text" />
+		<button type="submit">Create</button>
 	</form>
 </template>
 
 <style>
-form {
+.form {
 	display: flex;
 }
-input {
+.input {
 	display: block;
-	width: 100%;
+	flex-grow: 1;
+}
+
+@media (max-width: 450px) {
+	.form {
+		flex-direction: column;
+	}
 }
 </style>

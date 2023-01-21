@@ -13,7 +13,7 @@ const props = defineProps({
       :todo="todo"
       :key="todo.id"
     />
-    <p v-if="!props.todos.length > 0">ToDo кончились</p>
+    <p v-if="!props.todos.length > 0">No Todo's!</p>
   </div>
 </template>
 
