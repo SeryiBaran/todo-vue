@@ -1,23 +1,25 @@
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
+import { ref } from 'vue';
 
-import { useTodosStore } from "@/store";
-import { todoContentIsValid } from "@/utils";
+import { useTodosStore } from '@/store';
+import { todoContentIsValid } from '@/utils';
 
-const inputValue = ref("");
+const inputValue = ref('');
 
 const todosStore = useTodosStore();
 
 const handleSubmit = () => {
 	todosStore.create({ content: inputValue.value });
-	inputValue.value = "";
+	inputValue.value = '';
 };
 </script>
 
 <template>
 	<form @submit.prevent="handleSubmit" class="form">
 		<input class="input" v-model="inputValue" type="text" />
-		<button type="submit" :disabled="!todoContentIsValid(inputValue)">Create</button>
+		<button type="submit" :disabled="!todoContentIsValid(inputValue)">
+			Create
+		</button>
 	</form>
 </template>
 

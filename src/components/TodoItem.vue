@@ -1,14 +1,16 @@
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
+import { ref } from 'vue';
 
-import { useTodosStore } from "@/store";
-import { todoContentIsValid } from "@/utils";
+import { useTodosStore } from '@/store';
+import { todoContentIsValid } from '@/utils';
+
+import type { Todo } from '@/store';
 
 const todosStore = useTodosStore();
 
-const { todo } = defineProps({
-  todo: Object,
-});
+const { todo } = defineProps<{
+  todo: Todo;
+}>();
 
 const editInputValue = ref(todo.content);
 const isEdit = ref(false);
@@ -43,7 +45,7 @@ const toggleCompleted = () => {
           v-on="!isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }"
           :disabled="!todoContentIsValid(editInputValue)"
         >
-          {{ !isEdit ? "Edit" : "Done" }}
+          {{ !isEdit ? 'Edit' : 'Done' }}
         </button>
         <button @click="todosStore.remove(todo.id)">Remove</button>
       </div>

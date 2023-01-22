@@ -1,9 +1,11 @@
-<script setup>
-import TodoItem from "@/components/TodoItem.vue";
+<script setup lang="ts">
+import TodoItem from '@/components/TodoItem.vue';
 
-const props = defineProps({
-  todos: Array,
-});
+import type { TodosList } from '@/store';
+
+const props = defineProps<{
+  todos: TodosList;
+}>();
 </script>
 
 <template>
@@ -13,7 +15,7 @@ const props = defineProps({
       :todo="todo"
       :key="todo.id"
     />
-    <p v-if="!props.todos.length > 0">No Todo's!</p>
+    <p v-if="!(props.todos.length > 0)">No Todo's!</p>
   </div>
 </template>
 
