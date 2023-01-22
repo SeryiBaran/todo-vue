@@ -9,32 +9,32 @@ const inputValue = ref('');
 const todosStore = useTodosStore();
 
 const handleSubmit = () => {
-	todosStore.create({ content: inputValue.value });
-	inputValue.value = '';
+  todosStore.create({ content: inputValue.value });
+  inputValue.value = '';
 };
 </script>
 
 <template>
-	<form @submit.prevent="handleSubmit" class="form">
-		<input class="input" v-model="inputValue" type="text" />
-		<button type="submit" :disabled="!todoContentIsValid(inputValue)">
-			Create
-		</button>
-	</form>
+  <form @submit.prevent="handleSubmit" class="form">
+    <input class="input" v-model="inputValue" type="text" />
+    <button type="submit" :disabled="!todoContentIsValid(inputValue)">
+      Create
+    </button>
+  </form>
 </template>
 
 <style>
 .form {
-	display: flex;
+  display: flex;
 }
 .input {
-	display: block;
-	flex-grow: 1;
+  display: block;
+  flex-grow: 1;
 }
 
 @media (max-width: 450px) {
-	.form {
-		flex-direction: column;
-	}
+  .form {
+    flex-direction: column;
+  }
 }
 </style>
