@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import { useTodosStore } from '@/store';
 import { todoContentIsValid } from '@/utils';
 
-import type { Todo } from '@/store';
+import type { Todo } from '@/store/types';
 
 const todosStore = useTodosStore();
 

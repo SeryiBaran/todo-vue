@@ -1,19 +1,11 @@
 import { defineStore } from 'pinia';
 import { createPersistedStatePlugin } from 'pinia-plugin-persistedstate-2';
 
-import { generateId } from '@/utils';
+import { generateId, patchObjectInArray } from '@/utils';
 
 import { storage } from './idbStorage';
 
-export type Todo = {
-  id: string;
-  content: string;
-  completed: boolean;
-};
-
-export type TodosList = Todo[];
-
-export type TodosStore = { todos: Todo[] };
+import type { Todo, TodosList, TodosStore, TodoPatch } from './types';
 
 export const persist = createPersistedStatePlugin({ storage });
 
@@ -33,12 +25,12 @@ export const useTodosStore = defineStore('todos', {
       this.todos = this.todos.filter((todo: Todo) => todo.id !== id);
     },
 
-    patch(id: Todo['id'], callback: (todo: Todo) => any) {
-      const index = this.todos.findIndex((todo: Todo) => todo.id === id);
-      const todo: Todo = this.todos[index];
-      const patch = callback(todo);
-
-      this.todos[index] = { ...todo, ...patch };
+    patch(id: Todo['id'], patcher: (todo: Todo) => TodoPatch) {
+      this.todos = patchObjectInArray(
+        this.todos,
+        (todo: Todo) => todo.id === id,
+        patcher,
+      );
     },
 
     setContent(id: Todo['id'], newContent: Todo['content']) {
@@ -46,7 +38,9 @@ export const useTodosStore = defineStore('todos', {
     },
 
     toggleCompleted(id: Todo['id']) {
-      this.patch(id, (todo: Todo) => ({ completed: !todo.completed }));
+      this.patch(id, todo => ({
+        completed: !todo.completed,
+      }));
     },
   },
 });

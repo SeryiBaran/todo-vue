@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TodoItem from '@/components/TodoItem.vue';
 
-import type { TodosList } from '@/store';
+import type { TodosList } from '@/store/types';
 
 const props = defineProps<{
   todos: TodosList;
