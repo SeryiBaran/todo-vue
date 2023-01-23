@@ -1,46 +1,52 @@
+import { ref } from 'vue';
+
 import { defineStore } from 'pinia';
 import { createPersistedStatePlugin } from 'pinia-plugin-persistedstate-2';
 
 import { generateId, patchObjectInArray } from '@/utils';
-
 import { storage } from './idbStorage';
-
-import type { Todo, TodosList, TodosStore, TodoPatch } from './types';
+import type { Todo, TodosArray, TodoPatch } from './types';
 
 export const persist = createPersistedStatePlugin({ storage });
 
-export const useTodosStore = defineStore('todos', {
-  state: (): TodosStore => ({ todos: [] }),
+export const useTodosStore = defineStore('todos', () => {
+  const todos = ref<TodosArray>([]);
 
-  actions: {
-    create(data: Omit<Todo, 'id' | 'completed'>) {
-      this.todos.push({
-        id: generateId(),
-        completed: false,
-        ...data,
-      });
-    },
+  function create(data: Omit<Todo, 'id' | 'completed'>) {
+    todos.value.push({
+      id: generateId(),
+      completed: false,
+      ...data,
+    });
+  }
 
-    remove(id: Todo['id']) {
-      this.todos = this.todos.filter((todo: Todo) => todo.id !== id);
-    },
+  function remove(id: Todo['id']) {
+    todos.value = todos.value.filter((todo: Todo) => todo.id !== id);
+  }
 
-    patch(id: Todo['id'], patcher: (todo: Todo) => TodoPatch) {
-      this.todos = patchObjectInArray(
-        this.todos,
-        (todo: Todo) => todo.id === id,
-        patcher,
-      );
-    },
+  function patch(id: Todo['id'], patcher: (todo: Todo) => TodoPatch) {
+    todos.value = patchObjectInArray(
+      todos.value,
+      (todo: Todo) => todo.id === id,
+      patcher,
+    );
+  }
 
-    setContent(id: Todo['id'], newContent: Todo['content']) {
-      this.patch(id, () => ({ content: newContent }));
-    },
+  function setContent(id: Todo['id'], newContent: Todo['content']) {
+    patch(id, () => ({ content: newContent }));
+  }
 
-    toggleCompleted(id: Todo['id']) {
-      this.patch(id, todo => ({
-        completed: !todo.completed,
-      }));
-    },
-  },
+  function toggleCompleted(id: Todo['id']) {
+    patch(id, todo => ({
+      completed: !todo.completed,
+    }));
+  }
+
+  return {
+    todos,
+    create,
+    remove,
+    setContent,
+    toggleCompleted,
+  };
 });

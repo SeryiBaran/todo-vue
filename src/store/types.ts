@@ -4,8 +4,6 @@ export type Todo = {
   completed: boolean;
 };
 
-export type TodosList = Todo[];
-
-export type TodosStore = { todos: TodosList };
+export type TodosArray = Todo[];
 
 export type TodoPatch = Partial<Omit<Todo, 'id'>>;
