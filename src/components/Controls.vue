@@ -4,6 +4,8 @@ import { ref } from 'vue';
 import { useTodosStore } from '@/store';
 import { todoContentIsValid } from '@/utils';
 
+import IconButton from '@/components/IconButton.vue';
+
 const inputValue = ref('');
 
 const todosStore = useTodosStore();
@@ -17,9 +19,11 @@ const handleSubmit = () => {
 <template>
   <form @submit.prevent="handleSubmit" class="form">
     <input class="input" v-model="inputValue" type="text" />
-    <button type="submit" :disabled="!todoContentIsValid(inputValue)">
-      Create
-    </button>
+    <IconButton
+      icon="mdi:plus-circle"
+      type="submit"
+      :disabled="!todoContentIsValid(inputValue)"
+    />
   </form>
 </template>
 

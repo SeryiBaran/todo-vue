@@ -10,12 +10,21 @@ const props = defineProps<{
 
 <template>
   <div class="list">
-    <TodoItem
-      v-for="todo in props.todos.slice().reverse()"
-      :todo="todo"
-      :key="todo.id"
-    />
-    <p v-if="!(props.todos.length > 0)">No Todo's!</p>
+    <TransitionGroup name="list">
+      <TodoItem
+        class="list-item"
+        v-for="todo in props.todos.slice().reverse()"
+        :todo="todo"
+        :key="todo.id"
+      />
+      <p
+        class="no-todos-text"
+        v-if="!(props.todos.length > 0)"
+        key="no-todos-text"
+      >
+        No Todo's!
+      </p>
+    </TransitionGroup>
   </div>
 </template>
 
@@ -25,5 +34,23 @@ const props = defineProps<{
   flex-direction: column;
   gap: 1rem;
   text-align: left;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.list-item,
+.no-todos-text {
+  transition: all 0.2s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.list-leave-active {
+  position: absolute;
+  width: 100%;
 }
 </style>

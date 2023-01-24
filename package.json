@@ -17,6 +17,7 @@
     "vue": "^3.2.45"
   },
   "devDependencies": {
+    "@iconify/vue": "^4.0.2",
     "@types/node": "^18.11.12",
     "@types/uuid": "^9.0.0",
     "@vitejs/plugin-vue": "^4.0.0",

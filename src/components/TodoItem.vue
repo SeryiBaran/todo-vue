@@ -4,6 +4,8 @@ import { ref } from 'vue';
 import { useTodosStore } from '@/store';
 import { todoContentIsValid } from '@/utils';
 
+import IconButton from '@/components/IconButton.vue';
+
 import type { Todo } from '@/store/types';
 
 const todosStore = useTodosStore();
@@ -30,28 +32,34 @@ const toggleCompleted = () => {
 </script>
 
 <template>
-  <div class="card" :class="{ completed: todo.completed }">
-    <div class="controls">
-      <label>
-        <input
-          class="checkbox"
-          @click="toggleCompleted"
-          type="checkbox"
-          :checked="todo.completed"
-        />Completed</label
-      >
-      <div class="buttons">
-        <button
-          v-on="!isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }"
-          :disabled="!todoContentIsValid(editInputValue)"
+  <div>
+    <div class="card" :class="{ completed: todo.completed }">
+      <div class="controls">
+        <label>
+          <input
+            class="checkbox"
+            @click="toggleCompleted"
+            type="checkbox"
+            :checked="todo.completed"
+          />Completed</label
         >
-          {{ !isEdit ? 'Edit' : 'Done' }}
-        </button>
-        <button @click="todosStore.remove(todo.id)">Remove</button>
+        <div class="buttons">
+          <IconButton
+            v-on="
+              !isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }
+            "
+            :disabled="!todoContentIsValid(editInputValue)"
+            :icon="!isEdit ? 'mdi:pencil-circle' : 'mdi:check-circle'"
+          />
+          <IconButton
+            @click="todosStore.remove(todo.id)"
+            icon="mdi:delete-circle"
+          />
+        </div>
       </div>
+      <input class="editInput" v-if="isEdit" v-model="editInputValue" />
+      <pre v-else class="contentPre">{{ todo.content }}</pre>
     </div>
-    <input class="editInput" v-if="isEdit" v-model="editInputValue" />
-    <pre v-else class="contentPre">{{ todo.content }}</pre>
   </div>
 </template>
 
@@ -64,8 +72,8 @@ const toggleCompleted = () => {
   border-radius: 6px;
 }
 
-.card.completed {
-  opacity: 0.7;
+.card.completed .contentPre {
+  text-decoration: line-through;
 }
 
 .controls {
@@ -78,10 +86,6 @@ const toggleCompleted = () => {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.buttons button {
-  flex-grow: 1;
 }
 
 .editInput {
