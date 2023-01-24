@@ -10,3 +10,9 @@ body {
     'Droid Sans', 'Helvetica Neue', 'Segoe UI Emoji', 'Apple Color Emoji',
     'Noto Color Emoji', sans-serif;
 }
+
+@media (max-width: 450px) {
+  body {
+    font-size: 1.4rem;
+  }
+}

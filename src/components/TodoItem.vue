@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 
 import { useTodosStore } from '@/store';
 import { todoContentIsValid } from '@/utils';
@@ -14,12 +14,13 @@ const { todo } = defineProps<{
   todo: Todo;
 }>();
 
-const editInputValue = ref(todo.content);
+const inputRef = ref(null);
+const inputValue = ref(todo.content);
 const isEdit = ref(false);
 
 const handleSaveTodo = () => {
   isEdit.value = false;
-  todosStore.setContent(todo.id, editInputValue.value);
+  todosStore.setContent(todo.id, inputValue.value);
 };
 
 const handleEditTodo = () => {
@@ -29,6 +30,12 @@ const handleEditTodo = () => {
 const toggleCompleted = () => {
   todosStore.toggleCompleted(todo.id);
 };
+
+watchEffect(() => {
+  if (inputRef.value) {
+    inputRef.value.focus();
+  }
+});
 </script>
 
 <template>
@@ -48,7 +55,7 @@ const toggleCompleted = () => {
             v-on="
               !isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }
             "
-            :disabled="!todoContentIsValid(editInputValue)"
+            :disabled="!todoContentIsValid(inputValue)"
             :icon="!isEdit ? 'mdi:pencil-circle' : 'mdi:check-circle'"
           />
           <IconButton
@@ -57,7 +64,12 @@ const toggleCompleted = () => {
           />
         </div>
       </div>
-      <input class="editInput" v-if="isEdit" v-model="editInputValue" />
+      <input
+        ref="inputRef"
+        class="editInput"
+        v-if="isEdit"
+        v-model="inputValue"
+      />
       <pre v-else class="contentPre">{{ todo.content }}</pre>
     </div>
   </div>
@@ -106,8 +118,12 @@ const toggleCompleted = () => {
 }
 
 @media (max-width: 450px) {
-  .controls {
+  .controls,
+  .buttons {
     flex-direction: column;
+  }
+  .buttons {
+    width: 100%;
   }
 }
 </style>
