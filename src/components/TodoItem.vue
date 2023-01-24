@@ -88,6 +88,10 @@ const toggleCompleted = () => {
   justify-content: center;
 }
 
+.buttons button {
+  flex-grow: 1;
+}
+
 .editInput {
   border: 1px solid var(--focus);
   flex-grow: 1;
@@ -106,8 +110,10 @@ const toggleCompleted = () => {
 }
 
 @media (max-width: 450px) {
-  .controls {
+  .controls,
+  .buttons {
     flex-direction: column;
+    width: 100%;
   }
 }
 </style>
