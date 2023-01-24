@@ -18,12 +18,7 @@ const handleSubmit = () => {
 
 <template>
   <form @submit.prevent="handleSubmit" class="form">
-    <input
-      class="input"
-      :value="inputValue"
-      @input="evt => (inputValue = evt.target.value)"
-      type="text"
-    />
+    <input class="input" v-model="inputValue" type="text" />
     <IconButton
       icon="mdi:plus-circle"
       type="submit"
