@@ -14,7 +14,7 @@ const { todo } = defineProps<{
   todo: Todo;
 }>();
 
-const inputRef = ref(null);
+const inputRef = ref<HTMLInputElement | null>(null);
 const inputValue = ref(todo.content);
 const isEdit = ref(false);
 
