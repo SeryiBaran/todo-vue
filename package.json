@@ -14,7 +14,8 @@
     "pinia": "^2.0.29",
     "pinia-plugin-persistedstate-2": "^2.0.9",
     "uuid": "^9.0.0",
-    "vue": "^3.2.45"
+    "vue": "^3.2.45",
+    "water.css": "^2.1.1"
   },
   "devDependencies": {
     "@iconify/vue": "^4.0.2",

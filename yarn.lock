@@ -1152,6 +1152,11 @@ vue@^3.2.45:
     "@vue/server-renderer" "3.2.45"
     "@vue/shared" "3.2.45"
 
+water.css@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/water.css/-/water.css-2.1.1.tgz#ee6fe833a313a3a2edb588a57ed62b3e31dedd18"
+  integrity sha512-gkO5byC+pZ7ndEV18hs/RmxKoDtEZXx06tZU4ocI3IBdv4xV64tlhjIFbDjurysRnNkiy2oQTr8PakRyzZWPJw==
+
 which-boxed-primitive@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/which-boxed-primitive/-/which-boxed-primitive-1.0.2.tgz"
