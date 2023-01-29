@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import { useTodosStore } from '@/store';
 import { todoContentIsValid } from '@/utils';
 
-import IconButton from '@/components/IconButton.vue';
+import { IconButton } from '@/components';
 
 const inputValue = ref('');
 

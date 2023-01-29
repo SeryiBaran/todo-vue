@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TodoItem from '@/components/TodoItem.vue';
+import { TodoItem } from '@/components';
 
 import type { TodosArray } from '@/store/types';
 

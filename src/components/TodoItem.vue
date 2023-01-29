@@ -4,7 +4,7 @@ import { ref, watchEffect } from 'vue';
 import { useTodosStore } from '@/store';
 import { todoContentIsValid } from '@/utils';
 
-import IconButton from '@/components/IconButton.vue';
+import { IconButton } from '@/components';
 
 import type { Todo } from '@/store/types';
 

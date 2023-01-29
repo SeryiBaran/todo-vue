@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { useTodosStore } from "@/store";
-import Controls from "@/components/Controls.vue";
-import TodoList from "@/components/TodoList.vue";
+import { useTodosStore } from '@/store';
+import { Controls, TodoList } from '@/components';
 
 const todosStore = useTodosStore();
 </script>
