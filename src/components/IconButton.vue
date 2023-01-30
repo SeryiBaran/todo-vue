@@ -7,16 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <button class="icon-button">
+  <button class="btn btn-primary">
     <Icon :icon="icon" height="2em" width="2em" />
   </button>
 </template>
-
-<style>
-.icon-button {
-  padding: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-</style>

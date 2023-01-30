@@ -17,8 +17,8 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit" class="form">
-    <input class="input" v-model="inputValue" type="text" />
+  <form @submit.prevent="handleSubmit" class="flex gap-2">
+    <input class="input input-bordered" v-model="inputValue" type="text" />
     <IconButton
       icon="mdi:plus-circle"
       type="submit"
@@ -28,9 +28,6 @@ const handleSubmit = () => {
 </template>
 
 <style>
-.form {
-  display: flex;
-}
 .input {
   display: block;
   flex-grow: 1;

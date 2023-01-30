@@ -40,17 +40,21 @@ watchEffect(() => {
 
 <template>
   <div>
-    <div class="card" :class="{ completed: todo.completed }">
+    <div
+      class="card gap-2 bg-base-300 flex flex-col shadow-xl p-2 rounded-md"
+      :class="{ completed: todo.completed }"
+    >
       <div class="controls">
-        <label>
+        <label class="label cursor-pointer gap-1">
           <input
-            class="checkbox"
             @click="toggleCompleted"
             type="checkbox"
             :checked="todo.completed"
-          />Completed</label
-        >
-        <div class="buttons">
+            class="checkbox checkbox-primary"
+          />
+          <span class="label-text">Completed</span>
+        </label>
+        <div class="buttons gap-2">
           <IconButton
             v-on="
               !isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }
@@ -66,7 +70,7 @@ watchEffect(() => {
       </div>
       <input
         ref="inputRef"
-        class="editInput"
+        class="editInput input"
         v-if="isEdit"
         v-model="inputValue"
       />
@@ -76,14 +80,6 @@ watchEffect(() => {
 </template>
 
 <style scoped>
-.card {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--background);
-  padding: 6px;
-  border-radius: 6px;
-}
-
 .card.completed .contentPre {
   text-decoration: line-through;
 }

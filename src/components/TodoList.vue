@@ -12,7 +12,7 @@ const props = defineProps<{
   <div class="list">
     <TransitionGroup name="list">
       <TodoItem
-        class="list-item"
+        class="item"
         v-for="todo in props.todos.slice().reverse()"
         :todo="todo"
         :key="todo.id"
@@ -38,7 +38,7 @@ const props = defineProps<{
   box-sizing: border-box;
 }
 
-.list-item,
+.item,
 .no-todos-text {
   transition: all 0.2s ease;
 }
