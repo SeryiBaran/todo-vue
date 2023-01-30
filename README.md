@@ -7,6 +7,7 @@ As [todo-react](https://github.com/SeryiBaran/todo-vanilla), but Vue =)))
 - [Tailwind.css](https://tailwindcss.com/)
 - [daisyUI](https://daisyui.com/)
 - [Vue.js](https://vuejs.org/)
+- [Typescript](https://www.typescriptlang.org/)
 
 ## Tools:
 
