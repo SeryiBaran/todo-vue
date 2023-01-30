@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { ref, watchEffect, computed } from 'vue';
 
 import { useTodosStore } from '@/store';
 import { todoContentIsValid } from '@/utils';
@@ -16,6 +16,7 @@ const { todo } = defineProps<{
 
 const inputRef = ref<HTMLInputElement | null>(null);
 const inputValue = ref(todo.content);
+const isValid = computed(() => todoContentIsValid(inputValue.value));
 const isEdit = ref(false);
 
 const handleSaveTodo = () => {
@@ -44,37 +45,50 @@ watchEffect(() => {
       class="card gap-2 bg-base-300 flex flex-col shadow-xl p-2 rounded-md"
       :class="{ completed: todo.completed }"
     >
-      <div class="controls">
-        <label class="label cursor-pointer gap-1">
-          <input
-            @click="toggleCompleted"
-            type="checkbox"
-            :checked="todo.completed"
-            class="checkbox checkbox-primary"
-          />
-          <span class="label-text">Completed</span>
-        </label>
-        <div class="buttons gap-2">
-          <IconButton
-            v-on="
-              !isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }
-            "
-            :disabled="!todoContentIsValid(inputValue)"
-            :icon="!isEdit ? 'mdi:pencil-circle' : 'mdi:check-circle'"
-          />
-          <IconButton
-            @click="todosStore.remove(todo.id)"
-            icon="mdi:delete-circle"
-          />
-        </div>
-      </div>
       <input
         ref="inputRef"
         class="editInput input"
         v-if="isEdit"
         v-model="inputValue"
       />
-      <pre v-else class="contentPre">{{ todo.content }}</pre>
+      <pre
+        v-else
+        class="contentPre break-words p-2 font-sans whitespace-pre-wrap"
+        >{{ todo.content }}</pre
+      >
+      <div class="flex items-center justify-between max-sm:flex-col">
+        <label class="label cursor-pointer gap-1">
+          <input
+            @click="toggleCompleted"
+            type="checkbox"
+            :checked="todo.completed"
+            class="checkbox checkbox-primary checkbox-lg"
+          />
+          <span class="label-text">Completed</span>
+        </label>
+        <div
+          class="gap-2 flex flex-wrap justify-center max-sm:flex-col max-sm:w-full"
+        >
+          <div
+            class="flex"
+            :class="{ tooltip: !isValid }"
+            data-tip="Input is empty/contains only spaces!"
+          >
+            <IconButton
+              class="grow"
+              v-on="
+                !isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }
+              "
+              :disabled="!isValid"
+              :icon="!isEdit ? 'mdi:pencil-circle' : 'mdi:check-circle'"
+            />
+          </div>
+          <IconButton
+            @click="todosStore.remove(todo.id)"
+            icon="mdi:delete-circle"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -82,44 +96,5 @@ watchEffect(() => {
 <style scoped>
 .card.completed .contentPre {
   text-decoration: line-through;
-}
-
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.editInput {
-  border: 1px solid var(--focus);
-  flex-grow: 1;
-}
-
-.contentPre {
-  word-wrap: break-word;
-  margin: 0;
-  padding: 0.5rem;
-  font: unset;
-  white-space: pre-wrap;
-}
-
-.card.completed .contentPre {
-  text-decoration: line-through;
-}
-
-@media (max-width: 450px) {
-  .controls,
-  .buttons {
-    flex-direction: column;
-  }
-  .buttons {
-    width: 100%;
-  }
 }
 </style>
