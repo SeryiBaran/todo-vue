@@ -18,23 +18,11 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit" class="flex gap-2 max-sm:flex-col">
-    <div
-      class="flex w-full"
-      :class="{ tooltip: !isValid}"
-      data-tip="Input is empty/contains only spaces!"
-    >
-      <input
-        class="grow input input-bordered"
-        v-model="inputValue"
-        type="text"
-      />
-    </div>
-    <IconButton
-      class="grow"
-      icon="mdi:plus-circle"
-      type="submit"
-      :disabled="!isValid"
-    />
+  <form
+    @submit.prevent="handleSubmit"
+    class="input-group max-sm:input-group-vertical"
+  >
+    <input class="grow input input-bordered" v-model="inputValue" type="text" />
+    <IconButton icon="mdi:plus-circle" type="submit" :disabled="!isValid" />
   </form>
 </template>
