@@ -4,7 +4,8 @@ As [todo-react](https://github.com/SeryiBaran/todo-vanilla), but Vue =)))
 
 ## Technologies:
 
-- [Water.css](https://watercss.kognise.dev/)
+- [Tailwind.css](https://tailwindcss.com/)
+- [daisyUI](https://daisyui.com/)
 - [Vue.js](https://vuejs.org/)
 
 ## Tools:
