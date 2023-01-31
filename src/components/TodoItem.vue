@@ -69,20 +69,14 @@ watchEffect(() => {
         <div
           class="gap-2 flex flex-wrap justify-center max-sm:flex-col max-sm:w-full"
         >
-          <div
-            class="flex"
-            :class="{ tooltip: !isValid }"
-            data-tip="Input is empty/contains only spaces!"
-          >
-            <IconButton
-              class="grow"
-              v-on="
-                !isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }
-              "
-              :disabled="!isValid"
-              :icon="!isEdit ? 'mdi:pencil-circle' : 'mdi:check-circle'"
-            />
-          </div>
+          <IconButton
+            class="grow"
+            v-on="
+              !isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }
+            "
+            :disabled="!isValid"
+            :icon="!isEdit ? 'mdi:pencil-circle' : 'mdi:check-circle'"
+          />
           <IconButton
             @click="todosStore.remove(todo.id)"
             icon="mdi:delete-circle"
