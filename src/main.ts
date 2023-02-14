@@ -2,7 +2,6 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { createPersistedStatePlugin } from 'pinia-plugin-persistedstate-2';
 
-import 'virtual:windi.css'
 import '@/assets/main.css';
 
 import { persist } from '@/store';
