@@ -22,7 +22,7 @@ const handleSubmit = () => {
     @submit.prevent="handleSubmit"
     class="input-group max-sm:input-group-vertical"
   >
-    <input class="grow input input-bordered" v-model="inputValue" type="text" />
+    <input class="form-control" v-model="inputValue" type="text" />
     <IconButton icon="mdi:plus-circle" type="submit" :disabled="!isValid" />
   </form>
 </template>

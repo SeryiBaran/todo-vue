@@ -42,52 +42,57 @@ watchEffect(() => {
 <template>
   <div>
     <div
-      class="card gap-2 bg-base-300 flex flex-col shadow-xl p-2 rounded-md"
+      class="card gap-2 bg-body-secondary flex flex-col shadow-xl p-2 rounded-md"
       :class="{ completed: todo.completed }"
     >
-      <input
+      <textarea
         ref="inputRef"
-        class="editInput input"
+        class="editArea form-control"
         v-if="isEdit"
         v-model="inputValue"
       />
-      <pre
+      <p
         v-else
         class="contentPre break-words p-2 font-sans whitespace-pre-wrap"
-        >{{ todo.content }}</pre
       >
-      <div class="flex items-center justify-between max-sm:flex-col">
-        <label class="label cursor-pointer gap-1">
-          <input
-            @click="toggleCompleted"
-            type="checkbox"
-            :checked="todo.completed"
-            class="checkbox checkbox-primary checkbox-lg"
-          />
-          <span class="label-text">Completed</span>
+        {{ todo.content }}
+      </p>
+      <div class="d-flex flex-col flex-sm-row justify-content-end gap-2">
+        <input
+          @click="toggleCompleted"
+          type="checkbox"
+          :checked="todo.completed"
+          class="btn-check"
+          id="isCompletedCheck"
+        />
+        <label for="isCompletedCheck" class="btn btn-sm btn-outline-success">
+          Is completed
         </label>
-        <div
-          class="gap-2 flex flex-wrap justify-center max-sm:flex-col max-sm:w-full"
-        >
-          <IconButton
-            class="grow"
-            v-on="
-              !isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }
-            "
-            :disabled="!isValid"
-            :icon="!isEdit ? 'mdi:pencil-circle' : 'mdi:check-circle'"
-          />
-          <IconButton
-            @click="todosStore.remove(todo.id)"
-            icon="mdi:delete-circle"
-          />
-        </div>
+        <IconButton
+          class="btn-sm"
+          v-on="!isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }"
+          :disabled="!isValid"
+          :icon="!isEdit ? 'mdi:pencil-circle' : 'mdi:check-circle'"
+        />
+        <IconButton
+          class="btn-sm"
+          @click="todosStore.remove(todo.id)"
+          icon="mdi:delete-circle"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.todo {
+}
+
+.editArea {
+  min-height: 8rem;
+  resize: none;
+}
+
 .card.completed .contentPre {
   text-decoration: line-through;
 }

@@ -9,10 +9,10 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 text-left relative">
+  <div class="list flex flex-col gap-2 text-start position-relative row row-cols-1">
     <TransitionGroup name="list">
       <TodoItem
-        class="item"
+        class="item col"
         v-for="todo in props.todos.slice().reverse()"
         :todo="todo"
         :key="todo.id"
@@ -29,6 +29,9 @@ const props = defineProps<{
 </template>
 
 <style scoped>
+.list {
+}
+
 .item,
 .no-todos-text {
   transition: all 0.2s ease;

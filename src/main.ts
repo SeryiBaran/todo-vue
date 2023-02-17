@@ -1,6 +1,8 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { createPersistedStatePlugin } from 'pinia-plugin-persistedstate-2';
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import '@/assets/main.css';
 

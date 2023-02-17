@@ -8,6 +8,6 @@ defineProps<{
 
 <template>
   <button class="btn btn-primary">
-    <Icon :icon="icon" height="2em" width="2em" />
+    <Icon :icon="icon" height="auto" width="auto" />
   </button>
 </template>
