@@ -1,11 +1,10 @@
 # todo-vue
 
-As [todo-react](https://github.com/SeryiBaran/todo-vanilla), but Vue =)))
+As [todo-react](https://github.com/SeryiBaran/todo-react), but Vue =)))
 
 ## Technologies:
 
-- [Tailwind.css](https://tailwindcss.com/)
-- [daisyUI](https://daisyui.com/)
+- [Halfmoon](https://www.gethalfmoon.com//)
 - [Vue.js](https://vuejs.org/)
 - [Typescript](https://www.typescriptlang.org/)
 
