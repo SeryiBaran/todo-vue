@@ -9,7 +9,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 text-left relative">
+  <div class="list text-left">
     <TransitionGroup name="list">
       <TodoItem
         class="item"
@@ -29,6 +29,13 @@ const props = defineProps<{
 </template>
 
 <style scoped>
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+
 .item,
 .no-todos-text {
   transition: all 0.2s ease;

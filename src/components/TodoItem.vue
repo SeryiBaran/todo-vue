@@ -41,54 +41,81 @@ watchEffect(() => {
 
 <template>
   <div>
-    <div
-      class="card gap-2 bg-base-300 flex flex-col shadow-xl p-2 rounded-md"
-      :class="{ completed: todo.completed }"
-    >
-      <input
-        ref="inputRef"
-        class="editInput input"
-        v-if="isEdit"
-        v-model="inputValue"
-      />
-      <pre
-        v-else
-        class="contentPre break-words p-2 font-sans whitespace-pre-wrap"
-        >{{ todo.content }}</pre
-      >
-      <div class="flex items-center justify-between max-sm:flex-col">
-        <label class="label cursor-pointer gap-1">
+    <div class="card shadow" :class="{ completed: todo.completed }">
+      <div class="controls">
+        <div
+          class="isCompletedCheckbox custom-checkbox custom-checkbox-success"
+        >
           <input
             @click="toggleCompleted"
             type="checkbox"
             :checked="todo.completed"
             class="checkbox checkbox-primary checkbox-lg"
+            :id="'checkbox' + todo.id"
           />
-          <span class="label-text">Completed</span>
-        </label>
-        <div
-          class="gap-2 flex flex-wrap justify-center max-sm:flex-col max-sm:w-full"
-        >
-          <IconButton
-            class="grow"
-            v-on="
-              !isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }
-            "
-            :disabled="!isValid"
-            :icon="!isEdit ? 'mdi:pencil-circle' : 'mdi:check-circle'"
-          />
-          <IconButton
-            @click="todosStore.remove(todo.id)"
-            icon="mdi:delete-circle"
-          />
+          <label :for="'checkbox' + todo.id">
+            <span class="label-text">Completed</span>
+          </label>
         </div>
+        <IconButton
+          v-on="!isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }"
+          :disabled="!isValid"
+          :icon="!isEdit ? 'mdi:pencil-circle' : 'mdi:check-circle'"
+          :class="isEdit ? 'btn-success' : ''"
+        />
+        <IconButton
+          class="btn-danger"
+          @click="todosStore.remove(todo.id)"
+          icon="mdi:delete-circle"
+        />
       </div>
+      <input
+        ref="inputRef"
+        class="editInput form-control"
+        v-if="isEdit"
+        v-model="inputValue"
+      />
+      <p v-else class="contentPre">
+        {{ todo.content }}
+      </p>
     </div>
   </div>
 </template>
 
 <style scoped>
+.card {
+  margin: 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contentPre {
+  margin: 0;
+  word-break: break-all;
+}
+
+.isCompletedCheckbox {
+  margin-right: auto;
+}
+
 .card.completed .contentPre {
   text-decoration: line-through;
+}
+
+@media (max-width: 420px) {
+  .controls {
+    flex-direction: column;
+  }
+  .controls > * {
+    width: 100%;
+  }
 }
 </style>

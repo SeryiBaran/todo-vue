@@ -20,9 +20,11 @@ const handleSubmit = () => {
 <template>
   <form
     @submit.prevent="handleSubmit"
-    class="input-group max-sm:input-group-vertical"
+    class="input-group sm:input-group-vertical"
   >
-    <input class="grow input input-bordered" v-model="inputValue" type="text" />
-    <IconButton icon="mdi:plus-circle" type="submit" :disabled="!isValid" />
+    <input class="grow form-control" v-model="inputValue" type="text" />
+    <div class="input-group-append">
+      <IconButton icon="mdi:plus-circle" type="submit" :disabled="!isValid" />
+    </div>
   </form>
 </template>

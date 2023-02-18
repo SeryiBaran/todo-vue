@@ -2,6 +2,9 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { createPersistedStatePlugin } from 'pinia-plugin-persistedstate-2';
 
+import 'halfmoon';
+import 'halfmoon/css/halfmoon.min.css';
+
 import '@/assets/main.css';
 
 import { persist } from '@/store';
@@ -13,3 +16,7 @@ const pinia = createPinia();
 pinia.use(persist);
 
 createApp(App).use(pinia).mount('#app');
+
+import halfmoon from 'halfmoon';
+
+halfmoon.toggleDarkMode();
