@@ -30,7 +30,7 @@ const handleEditTodo = () => {
   isEdit.value = true;
 };
 
-const setIsCompleted = state => {
+const setIsCompleted = (state: boolean) => {
   todosStore.setIsCompleted(todo.id, state);
 };
 
@@ -64,7 +64,6 @@ watch(isCompleted, () => {
         </div>
         <div class="buttons">
           <Button
-            icon="pi pi-check-circle"
             class="grow"
             :class="{ 'p-button-success': isEdit }"
             v-on="
