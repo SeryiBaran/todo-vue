@@ -6,8 +6,8 @@ const todosStore = useTodosStore();
 </script>
 
 <template>
-  <div class="wrapper mt-1">
-    <h1 class="text-4xl">Vue.js TODO</h1>
+  <div class="wrapper">
+    <h1>Vue.js TODO</h1>
     <Controls />
     <TodoList :todos="todosStore.todos" />
   </div>
@@ -15,6 +15,7 @@ const todosStore = useTodosStore();
 
 <style scoped>
 .wrapper {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   max-width: 35rem;

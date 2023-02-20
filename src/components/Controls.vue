@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
 
 import { useTodosStore } from '@/store';
 import { todoContentIsValid } from '@/utils';
-
-import { IconButton } from '@/components';
 
 const inputValue = ref('');
 const isValid = computed(() => todoContentIsValid(inputValue.value));
@@ -18,11 +18,10 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <form
-    @submit.prevent="handleSubmit"
-    class="input-group max-sm:input-group-vertical"
-  >
-    <input class="grow input input-bordered" v-model="inputValue" type="text" />
-    <IconButton icon="mdi:plus-circle" type="submit" :disabled="!isValid" />
+  <form @submit.prevent="handleSubmit">
+    <div class="p-inputgroup">
+      <InputText v-model="inputValue" />
+      <Button icon="pi pi-check-circle" type="submit" :disabled="!isValid" />
+    </div>
   </form>
 </template>

@@ -36,9 +36,9 @@ export const useTodosStore = defineStore('todos', () => {
     patch(id, () => ({ content: newContent }));
   }
 
-  function toggleCompleted(id: Todo['id']) {
-    patch(id, todo => ({
-      completed: !todo.completed,
+  function setIsCompleted(id: Todo['id'], state: boolean) {
+    patch(id, () => ({
+      completed: state,
     }));
   }
 
@@ -47,6 +47,6 @@ export const useTodosStore = defineStore('todos', () => {
     create,
     remove,
     setContent,
-    toggleCompleted,
+    setIsCompleted,
   };
 });
