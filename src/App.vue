@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTodosStore } from '@/store';
-import { Controls, TodoList } from '@/components';
+import { TheControls, TheTodoList } from '@/components';
 
 const todosStore = useTodosStore();
 </script>
@@ -8,8 +8,8 @@ const todosStore = useTodosStore();
 <template>
   <div class="wrapper">
     <h1>Vue.js TODO</h1>
-    <Controls />
-    <TodoList :todos="todosStore.todos" />
+    <TheControls />
+    <TheTodoList :todos="todosStore.todos" />
   </div>
 </template>
 

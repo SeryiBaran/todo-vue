@@ -4,10 +4,8 @@ import Button from 'primevue/button';
 import Card from 'primevue/card';
 import Textarea from 'primevue/textarea';
 import Checkbox from 'primevue/checkbox';
-
 import { useTodosStore } from '@/store';
 import { todoContentIsValid } from '@/utils';
-
 import type { Todo } from '@/store/types';
 
 const todosStore = useTodosStore();

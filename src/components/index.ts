@@ -1,3 +1,3 @@
-export { default as Controls } from './Controls.vue';
-export { default as TodoList } from './TodoList.vue';
-export { default as TodoItem } from './TodoItem.vue';
+export { default as TheControls } from './TheControls.vue';
+export { default as TheTodoList } from './TheTodoList.vue';
+export { default as TodoListItem } from './TodoListItem.vue';

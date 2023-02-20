@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TodoItem } from '@/components';
+import { TodoListItem } from '@/components';
 
 import type { TodosArray } from '@/store/types';
 
@@ -11,7 +11,7 @@ const props = defineProps<{
 <template>
   <div class="list">
     <TransitionGroup name="list">
-      <TodoItem
+      <TodoListItem
         class="item"
         v-for="todo in props.todos.slice().reverse()"
         :todo="todo"
