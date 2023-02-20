@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { ref, watchEffect, computed } from 'vue';
+import { ref, watchEffect, computed, watch } from 'vue';
+import Button from 'primevue/button';
+import Card from 'primevue/card';
+import Textarea from 'primevue/textarea';
+import Checkbox from 'primevue/checkbox';
 
 import { useTodosStore } from '@/store';
 import { todoContentIsValid } from '@/utils';
-
-import { IconButton } from '@/components';
 
 import type { Todo } from '@/store/types';
 
@@ -14,81 +16,96 @@ const { todo } = defineProps<{
   todo: Todo;
 }>();
 
-const inputRef = ref<HTMLInputElement | null>(null);
-const inputValue = ref(todo.content);
-const isValid = computed(() => todoContentIsValid(inputValue.value));
+const textareaValue = ref(todo.content);
+const isValid = computed(() => todoContentIsValid(textareaValue.value));
 const isEdit = ref(false);
+const isCompleted = ref(todo.completed);
 
 const handleSaveTodo = () => {
   isEdit.value = false;
-  todosStore.setContent(todo.id, inputValue.value);
+  todosStore.setContent(todo.id, textareaValue.value);
 };
 
 const handleEditTodo = () => {
   isEdit.value = true;
 };
 
-const toggleCompleted = () => {
-  todosStore.toggleCompleted(todo.id);
+const setIsCompleted = state => {
+  todosStore.setIsCompleted(todo.id, state);
 };
 
-watchEffect(() => {
-  if (inputRef.value) {
-    inputRef.value.focus();
-  }
+watch(isCompleted, () => {
+  setIsCompleted(isCompleted.value);
 });
 </script>
 
 <template>
-  <div>
-    <div
-      class="card gap-2 bg-base-300 flex flex-col shadow-xl p-2 rounded-md"
-      :class="{ completed: todo.completed }"
-    >
-      <input
-        ref="inputRef"
-        class="editInput input"
+  <Card class="card" :class="{ completed: todo.completed }">
+    <template #content>
+      <Textarea
+        class="textarea input"
         v-if="isEdit"
-        v-model="inputValue"
+        v-model="textareaValue"
+        :autoResize="true"
       />
-      <pre
-        v-else
-        class="contentPre break-words p-2 font-sans whitespace-pre-wrap"
-        >{{ todo.content }}</pre
-      >
-      <div class="flex items-center justify-between max-sm:flex-col">
-        <label class="label cursor-pointer gap-1">
-          <input
-            @click="toggleCompleted"
-            type="checkbox"
-            :checked="todo.completed"
-            class="checkbox checkbox-primary checkbox-lg"
+      <p v-else class="content">
+        {{ todo.content }}
+      </p>
+    </template>
+    <template #footer>
+      <div class="controls">
+        <div class="field-checkbox">
+          <Checkbox
+            :inputId="`checkbox-${todo.id}`"
+            v-model="isCompleted"
+            :binary="true"
           />
-          <span class="label-text">Completed</span>
-        </label>
-        <div
-          class="gap-2 flex flex-wrap justify-center max-sm:flex-col max-sm:w-full"
-        >
-          <IconButton
+          <label :for="`checkbox-${todo.id}`">Completed</label>
+        </div>
+        <div class="buttons">
+          <Button
+            icon="pi pi-check-circle"
             class="grow"
+            :class="{ 'p-button-success': isEdit }"
             v-on="
               !isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }
             "
             :disabled="!isValid"
-            :icon="!isEdit ? 'mdi:pencil-circle' : 'mdi:check-circle'"
+            :icon="`pi ${!isEdit ? 'pi-pencil' : 'pi-check-circle'}`"
           />
-          <IconButton
+          <Button
+            class="p-button-danger"
+            icon="pi pi-trash"
             @click="todosStore.remove(todo.id)"
-            icon="mdi:delete-circle"
           />
         </div>
       </div>
-    </div>
-  </div>
+    </template>
+  </Card>
 </template>
 
 <style scoped>
-.card.completed .contentPre {
+.card {
+  width: 100%;
+  text-align: left;
+}
+
+.textarea {
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card.completed .content {
   text-decoration: line-through;
 }
 </style>
