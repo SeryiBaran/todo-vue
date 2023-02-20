@@ -104,6 +104,10 @@ watch(isCompleted, () => {
   gap: 0.5rem;
 }
 
+.content {
+  word-break: break-all;
+}
+
 .card.completed .content {
   text-decoration: line-through;
 }
