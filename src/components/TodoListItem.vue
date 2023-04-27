@@ -1,51 +1,55 @@
 <script setup lang="ts">
-import { ref, watchEffect, computed, watch } from 'vue';
-import Button from 'primevue/button';
-import Card from 'primevue/card';
-import Textarea from 'primevue/textarea';
-import Checkbox from 'primevue/checkbox';
-import { useTodosStore } from '@/store';
-import { todoContentIsValid } from '@/utils';
-import type { Todo } from '@/store/types';
+import { computed, ref, watch } from 'vue'
+import Button from 'primevue/button'
+import Card from 'primevue/card'
+import Textarea from 'primevue/textarea'
+import Checkbox from 'primevue/checkbox'
 
-const todosStore = useTodosStore();
+import { useTodosStore } from '@/store'
+import { todoContentIsValid } from '@/utils'
+import type { Todo } from '@/store/types'
 
 const { todo } = defineProps<{
-  todo: Todo;
-}>();
+  todo: Todo
+}>()
 
-const textareaValue = ref(todo.content);
-const isValid = computed(() => todoContentIsValid(textareaValue.value));
-const isEdit = ref(false);
-const isCompleted = ref(todo.completed);
+const todosStore = useTodosStore()
 
-const handleSaveTodo = () => {
-  isEdit.value = false;
-  todosStore.setContent(todo.id, textareaValue.value);
-};
+const textareaValue = ref(todo.content)
+const isValid = computed(() => todoContentIsValid(textareaValue.value))
+const isEdit = ref(false)
+const isCompleted = ref(todo.completed)
 
-const handleEditTodo = () => {
-  isEdit.value = true;
-};
+function handleSaveTodo() {
+  isEdit.value = false
+  todosStore.setContent(todo.id, textareaValue.value)
+}
 
-const setIsCompleted = (state: boolean) => {
-  todosStore.setIsCompleted(todo.id, state);
-};
+function handleEditTodo() {
+  isEdit.value = true
+}
+
+function handleEditButtonClick() {
+  if (isEdit.value)
+    handleSaveTodo()
+
+  else
+    handleEditTodo()
+}
+
+function setIsCompleted(state: boolean) {
+  todosStore.setIsCompleted(todo.id, state)
+}
 
 watch(isCompleted, () => {
-  setIsCompleted(isCompleted.value);
-});
+  setIsCompleted(isCompleted.value)
+})
 </script>
 
 <template>
   <Card class="card" :class="{ completed: todo.completed }">
     <template #content>
-      <Textarea
-        class="textarea input"
-        v-if="isEdit"
-        v-model="textareaValue"
-        :autoResize="true"
-      />
+      <Textarea v-if="isEdit" v-model="textareaValue" class="textarea input" :auto-resize="true" />
       <p v-else class="content">
         {{ todo.content }}
       </p>
@@ -53,28 +57,15 @@ watch(isCompleted, () => {
     <template #footer>
       <div class="controls">
         <div class="field-checkbox">
-          <Checkbox
-            :inputId="`checkbox-${todo.id}`"
-            v-model="isCompleted"
-            :binary="true"
-          />
+          <Checkbox v-model="isCompleted" :input-id="`checkbox-${todo.id}`" :binary="true" />
           <label :for="`checkbox-${todo.id}`">Completed</label>
         </div>
         <div class="buttons">
           <Button
-            class="grow"
-            :class="{ 'p-button-success': isEdit }"
-            v-on="
-              !isEdit ? { click: handleEditTodo } : { click: handleSaveTodo }
-            "
-            :disabled="!isValid"
-            :icon="`pi ${!isEdit ? 'pi-pencil' : 'pi-check-circle'}`"
+            class="grow" :class="{ 'p-button-success': isEdit }" :disabled="!isValid" :icon="`pi ${!isEdit ? 'pi-pencil' : 'pi-check-circle'}`"
+            @click="handleEditButtonClick"
           />
-          <Button
-            class="p-button-danger"
-            icon="pi pi-trash"
-            @click="todosStore.remove(todo.id)"
-          />
+          <Button class="p-button-danger" icon="pi pi-trash" @click="todosStore.remove(todo.id)" />
         </div>
       </div>
     </template>

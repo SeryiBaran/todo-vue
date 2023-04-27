@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import Button from 'primevue/button';
-import InputText from 'primevue/inputtext';
+import { computed, ref } from 'vue'
+import Button from 'primevue/button'
+import InputText from 'primevue/inputtext'
 
-import { useTodosStore } from '@/store';
-import { todoContentIsValid } from '@/utils';
+import { useTodosStore } from '@/store'
+import { todoContentIsValid } from '@/utils'
 
-const inputValue = ref('');
-const isValid = computed(() => todoContentIsValid(inputValue.value));
+const inputValue = ref('')
+const isValid = computed(() => todoContentIsValid(inputValue.value))
 
-const todosStore = useTodosStore();
+const todosStore = useTodosStore()
 
-const handleSubmit = () => {
-  todosStore.create({ content: inputValue.value });
-  inputValue.value = '';
-};
+function handleSubmit() {
+  todosStore.create({ content: inputValue.value })
+  inputValue.value = ''
+}
 </script>
 
 <template>

@@ -1,26 +1,29 @@
 <script setup lang="ts">
-import { TodoListItem } from '@/components';
+import { computed } from 'vue'
+import TodoListItem from '@/components/TodoListItem.vue'
 
-import type { TodosArray } from '@/store/types';
+import type { TodosArray } from '@/store/types'
 
 const props = defineProps<{
-  todos: TodosArray;
-}>();
+  todos: TodosArray
+}>()
+
+const reversedTodos = computed(() => props.todos.slice().reverse())
 </script>
 
 <template>
   <div class="list">
     <TransitionGroup name="list">
       <TodoListItem
-        class="item"
-        v-for="todo in props.todos.slice().reverse()"
-        :todo="todo"
+        v-for="todo in reversedTodos"
         :key="todo.id"
+        class="item"
+        :todo="todo"
       />
       <p
-        class="no-todos-text"
         v-if="!(props.todos.length > 0)"
         key="no-todos-text"
+        class="no-todos-text"
       >
         No Todo's!
       </p>
