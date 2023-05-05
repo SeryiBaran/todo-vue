@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import TodoListItem from '@/components/TodoListItem.vue'
-
-import type { TodosArray } from '@/store/types'
+import type { Todo } from '@/store/types'
 
 const props = defineProps<{
-  todos: TodosArray
+  todos: Todo[]
 }>()
 
 const reversedTodos = computed(() => props.todos.slice().reverse())
