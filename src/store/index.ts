@@ -3,14 +3,13 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { createPersistedStatePlugin } from 'pinia-plugin-persistedstate-2'
 
-import { storage } from './idbStorage'
-import type { Todo, TodoPatch, TodosArray } from './types'
-import { generateId, patchObjectInArray } from '@/utils'
+import type { Todo } from './types'
+import { generateId } from '@/utils'
 
-export const persist = createPersistedStatePlugin({ storage })
+export const persist = createPersistedStatePlugin()
 
 export const useTodosStore = defineStore('todos', () => {
-  const todos = ref<TodosArray>([])
+  const todos = ref<Todo[]>([])
 
   function create(data: Omit<Todo, 'id' | 'completed'>) {
     todos.value.push({
@@ -24,22 +23,16 @@ export const useTodosStore = defineStore('todos', () => {
     todos.value = todos.value.filter((todo: Todo) => todo.id !== id)
   }
 
-  function patch(id: Todo['id'], patcher: (todo: Todo) => TodoPatch) {
-    todos.value = patchObjectInArray(
-      todos.value,
-      (todo: Todo) => todo.id === id,
-      patcher
-    )
-  }
-
   function setContent(id: Todo['id'], newContent: Todo['content']) {
-    patch(id, () => ({ content: newContent }))
+    const findedTodo = todos.value.find((todo) => todo.id === id)
+
+    if (findedTodo) findedTodo.content = newContent
   }
 
-  function setIsCompleted(id: Todo['id'], state: boolean) {
-    patch(id, () => ({
-      completed: state,
-    }))
+  function setIsCompleted(id: Todo['id'], newIsCompleted: boolean) {
+    const findedTodo = todos.value.find((todo) => todo.id === id)
+
+    if (findedTodo) findedTodo.completed = newIsCompleted
   }
 
   return {

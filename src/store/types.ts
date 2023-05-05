@@ -4,6 +4,4 @@ export interface Todo {
   completed: boolean
 }
 
-export type TodosArray = Todo[]
-
 export type TodoPatch = Partial<Omit<Todo, 'id'>>
