@@ -28,7 +28,7 @@ export const useTodosStore = defineStore('todos', () => {
     todos.value = patchObjectInArray(
       todos.value,
       (todo: Todo) => todo.id === id,
-      patcher,
+      patcher
     )
   }
 

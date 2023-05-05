@@ -30,11 +30,8 @@ function handleEditTodo() {
 }
 
 function handleEditButtonClick() {
-  if (isEdit.value)
-    handleSaveTodo()
-
-  else
-    handleEditTodo()
+  if (isEdit.value) handleSaveTodo()
+  else handleEditTodo()
 }
 
 function setIsCompleted(state: boolean) {
@@ -49,7 +46,12 @@ watch(isCompleted, () => {
 <template>
   <Card class="card" :class="{ completed: todo.completed }">
     <template #content>
-      <Textarea v-if="isEdit" v-model="textareaValue" class="textarea input" :auto-resize="true" />
+      <Textarea
+        v-if="isEdit"
+        v-model="textareaValue"
+        class="textarea input"
+        :auto-resize="true"
+      />
       <p v-else class="content">
         {{ todo.content }}
       </p>
@@ -57,15 +59,26 @@ watch(isCompleted, () => {
     <template #footer>
       <div class="controls">
         <div class="field-checkbox">
-          <Checkbox v-model="isCompleted" :input-id="`checkbox-${todo.id}`" :binary="true" />
+          <Checkbox
+            v-model="isCompleted"
+            :input-id="`checkbox-${todo.id}`"
+            :binary="true"
+          />
           <label :for="`checkbox-${todo.id}`">Completed</label>
         </div>
         <div class="buttons">
           <Button
-            class="grow" :class="{ 'p-button-success': isEdit }" :disabled="!isValid" :icon="`pi ${!isEdit ? 'pi-pencil' : 'pi-check-circle'}`"
+            class="grow"
+            :class="{ 'p-button-success': isEdit }"
+            :disabled="!isValid"
+            :icon="`pi ${!isEdit ? 'pi-pencil' : 'pi-check-circle'}`"
             @click="handleEditButtonClick"
           />
-          <Button class="p-button-danger" icon="pi pi-trash" @click="todosStore.remove(todo.id)" />
+          <Button
+            class="p-button-danger"
+            icon="pi pi-trash"
+            @click="todosStore.remove(todo.id)"
+          />
         </div>
       </div>
     </template>
