@@ -1,4 +1,5 @@
 {
   "controlsInputPlaceholder": "Введите текст...",
-  "noTodos": "Тудушки закончились :("
+  "noTodos": "Тудушки закончились :(",
+  "about": "Простое todo-приложение на Vue.js"
 }

@@ -1,4 +1,5 @@
 {
   "controlsInputPlaceholder": "Write text...",
-  "noTodos": "No todos :("
+  "noTodos": "No todos :(",
+  "about": "Simple Vue.js todo app"
 }

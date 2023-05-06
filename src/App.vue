@@ -30,6 +30,7 @@ const todosStore = useTodosStore()
       </select>
     </div>
     <h1 class="mt-20 text-4xl">Vue.js TODO</h1>
+    <p data-testId="aboutParagraph">{{ $t('about') }}</p>
     <TheControls />
     <TheTodoList :todos="todosStore.todos" />
   </div>

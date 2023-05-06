@@ -21,10 +21,9 @@ const reversedTodos = computed(() => props.todos.slice().reverse())
         data-testId="todoListItem"
       />
       <p
-        v-show="!(props.todos.length > 0)"
+        v-if="!(props.todos.length > 0)"
         key="no-todos-text"
         class="no-todos-text"
-        data-testId="noTodosParagraph"
       >
         {{ $t('noTodos') }}
       </p>

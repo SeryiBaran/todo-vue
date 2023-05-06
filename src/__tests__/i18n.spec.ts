@@ -6,7 +6,7 @@ import { config } from '../i18n'
 import App from '../App.vue'
 
 describe('I18n', async () => {
-  it('Switch all locales', async () => {
+  it('Switching works', async () => {
     expect(App).toBeTruthy()
 
     const i18nPlugin = createI18n(config)
@@ -28,8 +28,8 @@ describe('I18n', async () => {
           .find('select[data-testId="localeSelect"]')
           .setValue(locales[index])
 
-      expect(wrapper.find('p[data-testId="noTodosParagraph"]').text()).toBe(
-        config.messages[locales[index]].noTodos
+      expect(wrapper.find('p[data-testId="aboutParagraph"]').text()).toBe(
+        config.messages[locales[index]].about
       )
     }
   })
