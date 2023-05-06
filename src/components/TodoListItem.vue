@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import Button from 'primevue/button'
-import Card from 'primevue/card'
-import Textarea from 'primevue/textarea'
-import Checkbox from 'primevue/checkbox'
+
+import PencilIcon from '~icons/tabler/Pencil'
+import TrashIcon from '~icons/tabler/Trash'
+import SquareRoundedCheckIcon from '~icons/tabler/SquareRoundedCheck'
 
 import { useTodosStore } from '@/store'
 import { todoContentIsValid } from '@/utils'
@@ -44,73 +44,47 @@ watch(isCompleted, () => {
 </script>
 
 <template>
-  <Card class="card" :class="{ completed: todo.completed }">
-    <template #content>
-      <Textarea
+  <div class="card w-full bg-base-200 shadow-md text-start">
+    <div class="card-body gap-4">
+      <textarea
         v-if="isEdit"
         v-model="textareaValue"
-        class="textarea input"
+        class="textarea textarea-bordered"
         :auto-resize="true"
       />
-      <p v-else class="content">
+      <p v-else class="content" :class="{ completed: todo.completed }">
         {{ todo.content }}
       </p>
-    </template>
-    <template #footer>
-      <div class="controls">
-        <div class="field-checkbox">
-          <Checkbox
+      <div class="controls flex flex-col gap-4">
+        <div class="flex gap-2 items-center">
+          <input
             v-model="isCompleted"
-            :input-id="`checkbox-${todo.id}`"
-            :binary="true"
+            type="checkbox"
+            class="checkbox checkbox-primary h-12 w-12"
           />
-          <label :for="`checkbox-${todo.id}`">Completed</label>
-        </div>
-        <div class="buttons">
-          <Button
-            class="grow"
-            :class="{ 'p-button-success': isEdit }"
+          <button
+            class="btn btn-primary grow"
+            :class="{ 'btn-success': isEdit }"
             :disabled="!isValid"
-            :icon="`pi ${!isEdit ? 'pi-pencil' : 'pi-check-circle'}`"
             @click="handleEditButtonClick"
-          />
-          <Button
-            class="p-button-danger"
-            icon="pi pi-trash"
+          >
+            <PencilIcon v-if="!isEdit" class="buttonIcon" />
+            <SquareRoundedCheckIcon v-else class="buttonIcon" />
+          </button>
+          <button
+            class="btn btn-error grow"
             @click="todosStore.remove(todo.id)"
-          />
+          >
+            <TrashIcon class="buttonIcon" />
+          </button>
         </div>
       </div>
-    </template>
-  </Card>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-.card {
-  width: 100%;
-  text-align: left;
-}
-
-.textarea {
-  width: 100%;
-}
-
-.controls {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.buttons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.content {
-  word-break: break-all;
-}
-
-.card.completed .content {
+.completed {
   text-decoration: line-through;
 }
 </style>

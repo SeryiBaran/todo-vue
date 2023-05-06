@@ -7,8 +7,8 @@ const todosStore = useTodosStore()
 </script>
 
 <template>
-  <div class="wrapper">
-    <h1>Vue.js TODO</h1>
+  <div class="wrapper max-w-md">
+    <h1 class="text-4xl mt-20">Vue.js TODO</h1>
     <TheControls />
     <TheTodoList :todos="todosStore.todos" />
   </div>
@@ -16,13 +16,6 @@ const todosStore = useTodosStore()
 
 <style scoped>
 .wrapper {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  max-width: 35rem;
-  margin: 0 auto;
-  padding: 1rem;
-  gap: 3rem;
-  text-align: center;
+  @apply min-h-screen flex flex-col mx-auto p-4 gap-12 text-center;
 }
 </style>

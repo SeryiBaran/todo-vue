@@ -24,7 +24,7 @@ const reversedTodos = computed(() => props.todos.slice().reverse())
         key="no-todos-text"
         class="no-todos-text"
       >
-        No Todo's!
+        Тудушки кончились ;(
       </p>
     </TransitionGroup>
   </div>
@@ -32,11 +32,7 @@ const reversedTodos = computed(() => props.todos.slice().reverse())
 
 <style scoped>
 .list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  gap: 1rem;
+  @apply flex flex-col items-center relative gap-4;
 }
 
 .item,

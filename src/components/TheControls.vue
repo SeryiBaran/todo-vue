@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import Button from 'primevue/button'
-import InputText from 'primevue/inputtext'
-
+import CirclePlus from '~icons/tabler/CirclePlus'
 import { useTodosStore } from '@/store'
 import { todoContentIsValid } from '@/utils'
 
@@ -20,8 +18,23 @@ function handleSubmit() {
 <template>
   <form @submit.prevent="handleSubmit">
     <div class="p-inputgroup">
-      <InputText v-model="inputValue" />
-      <Button icon="pi pi-check-circle" type="submit" :disabled="!isValid" />
+      <div class="form-control">
+        <div class="input-group">
+          <input
+            v-model="inputValue"
+            type="text"
+            placeholder="Введите текст..."
+            class="input input-bordered grow"
+          />
+          <button
+            class="btn btn-primary rounded-full"
+            type="submit"
+            :disabled="!isValid"
+          >
+            <CirclePlus class="buttonIcon" />
+          </button>
+        </div>
+      </div>
     </div>
   </form>
 </template>
