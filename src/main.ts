@@ -10,12 +10,14 @@ import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 import '@/assets/main.css'
 
+import { createPersistedStatePlugin } from 'pinia-plugin-persistedstate-2'
 import App from './App.vue'
-import { persist } from '@/store'
 
 const isDark = useDark()
 
 const pinia = createPinia()
+
+export const persist = createPersistedStatePlugin()
 
 pinia.use(persist)
 
