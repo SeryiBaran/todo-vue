@@ -18,13 +18,15 @@ const reversedTodos = computed(() => props.todos.slice().reverse())
         :key="todo.id"
         class="item"
         :todo="todo"
+        data-testId="todoListItem"
       />
       <p
-        v-if="!(props.todos.length > 0)"
+        v-show="!(props.todos.length > 0)"
         key="no-todos-text"
         class="no-todos-text"
+        data-testId="noTodosParagraph"
       >
-        Тудушки кончились ;(
+        {{ $t('noTodos') }}
       </p>
     </TransitionGroup>
   </div>

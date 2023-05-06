@@ -16,15 +16,16 @@ function handleSubmit() {
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form data-testId="controlsForm" @submit.prevent="handleSubmit">
     <div class="p-inputgroup">
       <div class="form-control">
         <div class="input-group">
           <input
             v-model="inputValue"
             type="text"
-            placeholder="Введите текст..."
+            :placeholder="$t('controlsInputPlaceholder')"
             class="input input-bordered grow"
+            data-testId="controlsContentInput"
           />
           <button
             class="btn btn-primary rounded-full"

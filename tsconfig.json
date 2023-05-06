@@ -1,20 +1,23 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
     "baseUrl": ".",
+    "module": "ESNext",
+    "target": "es2016",
+    "lib": ["DOM", "ESNext"],
+    "strict": true,
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
     "paths": {
       "@/*": ["./src/*"]
-    },
-    "ignoreDeprecations": "5.0",
-    "strictNullChecks": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "types": ["unplugin-icons/types/vue"]
-  },
-  "references": [
-    {
-      "path": "./tsconfig.config.json"
     }
-  ]
+  },
+  "include": ["env.d.ts", "./src/**/*"],
+  "exclude": ["dist", "node_modules", "*.cjs"]
 }

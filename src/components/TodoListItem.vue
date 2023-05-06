@@ -44,7 +44,7 @@ watch(isCompleted, () => {
 </script>
 
 <template>
-  <div class="card w-full bg-base-200 shadow-md text-start">
+  <div class="card bg-base-200 w-full text-start shadow-md">
     <div class="card-body gap-4">
       <textarea
         v-if="isEdit"
@@ -52,11 +52,16 @@ watch(isCompleted, () => {
         class="textarea textarea-bordered"
         :auto-resize="true"
       />
-      <p v-else class="content" :class="{ completed: todo.completed }">
+      <p
+        v-else
+        class="content"
+        :class="{ completed: todo.completed }"
+        data-testId="todoListItemContentParagraph"
+      >
         {{ todo.content }}
       </p>
       <div class="controls flex flex-col gap-4">
-        <div class="flex gap-2 items-center">
+        <div class="flex items-center gap-2">
           <input
             v-model="isCompleted"
             type="checkbox"
