@@ -8,7 +8,7 @@ export const messages = {
 
 export const config = {
   legacy: false,
-  locale: navigator.language || 'en',
+  locale: navigator.language.slice(0, 2) || 'en',
   fallbackLocale: 'en',
   messages,
 }
