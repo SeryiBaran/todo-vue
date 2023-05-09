@@ -1,11 +1,11 @@
-import { ref } from 'vue'
 import { nanoid } from 'nanoid'
 import { defineStore } from 'pinia'
+import { useStorage } from '@vueuse/core'
 import type { Todo } from './types'
 import { findTodoById } from '@/utils'
 
 export const useTodosStore = defineStore('todos', () => {
-  const todos = ref<Todo[]>([])
+  const todos = useStorage<Todo[]>('todos', [])
 
   function create(data: Omit<Todo, 'id' | 'completed'>) {
     todos.value.push({
