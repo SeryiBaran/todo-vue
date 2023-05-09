@@ -12,42 +12,25 @@ const reversedTodos = computed(() => props.todos.slice().reverse())
 
 <template>
   <div class="list">
-    <TransitionGroup name="list">
-      <TodoListItem
-        v-for="todo in reversedTodos"
-        :key="todo.id"
-        class="item"
-        :todo="todo"
-        data-testId="todoListItem"
-      />
-      <p
-        v-if="!(props.todos.length > 0)"
-        key="no-todos-text"
-        class="no-todos-text"
-      >
-        {{ $t('noTodos') }}
-      </p>
-    </TransitionGroup>
+    <p
+      v-if="!(props.todos.length > 0)"
+      key="no-todos-text"
+      class="no-todos-text"
+    >
+      {{ $t('noTodos') }}
+    </p>
+    <TodoListItem
+      v-for="todo in reversedTodos"
+      :key="todo.id"
+      class="item"
+      :todo="todo"
+      data-testId="todoListItem"
+    />
   </div>
 </template>
 
 <style scoped>
 .list {
-  @apply flex flex-col items-center relative gap-4;
-}
-
-.item,
-.no-todos-text {
-  transition: all 0.2s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(-30px);
-}
-
-.list-leave-active {
-  position: absolute;
+  @apply flex flex-col items-center gap-4;
 }
 </style>
