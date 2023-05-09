@@ -1,20 +1,9 @@
-# tailvue-starter
+# todo-vue
 
-Стартовый шаблон Vue.
+Todo на Vue.js.
 
-Основано на [Vitesse-lite](https://github.com/antfu/vitesse-lite).
+Основано на [Tailvue starter](https://github.com/SeryiBaran/tailvue-starter).
 
 ## Технологии
 
-- [TailwindCSS](https://tailwindcss.com/)
-- [Vue.js](https://vuejs.org/)
-- [Vue-I18n](https://vue-i18n.intlify.dev/)
-- [Typescript](https://www.typescriptlang.org/)
-- [Vite.js](https://vitejs.dev/)
-- [Vitest](https://vitest.dev/)
-- [TailwindCSS Forms](https://github.com/tailwindlabs/tailwindcss-forms)
-- [VueUse](https://vueuse.org/)
-- [Eslint](https://eslint.org/)
-- [FontSource](https://fontsource.org/)
-- [Iconify](https://iconify.design/)
-- [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks/)
+[Здесь](https://github.com/SeryiBaran/tailvue-starter)
