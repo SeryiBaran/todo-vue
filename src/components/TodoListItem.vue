@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
 import PencilIcon from '~icons/tabler/Pencil'
 import TrashIcon from '~icons/tabler/Trash'
@@ -18,7 +18,7 @@ const todosStore = useTodosStore()
 const textareaValue = ref(todo.content)
 const isValid = computed(() => todoContentIsValid(textareaValue.value))
 const isEdit = ref(false)
-const isCompleted = ref(todo.completed)
+const isCompletedCheckbox = ref()
 
 function handleSaveTodo() {
   isEdit.value = false
@@ -34,13 +34,10 @@ function handleEditButtonClick() {
   else handleEditTodo()
 }
 
-function setIsCompleted(state: boolean) {
-  todosStore.setIsCompleted(todo.id, state)
+function handleToggleCompleted() {
+  const checkbox = isCompletedCheckbox
+  todosStore.setIsCompleted(todo.id, checkbox.value.checked)
 }
-
-watch(isCompleted, () => {
-  setIsCompleted(isCompleted.value)
-})
 </script>
 
 <template>
@@ -63,9 +60,11 @@ watch(isCompleted, () => {
       <div class="controls flex flex-col gap-4">
         <div class="flex items-center gap-2">
           <input
-            v-model="isCompleted"
+            ref="isCompletedCheckbox"
+            :checked="todo.completed"
             type="checkbox"
             class="checkbox checkbox-primary h-12 w-12"
+            @change="handleToggleCompleted()"
           />
           <button
             class="btn btn-primary grow"
