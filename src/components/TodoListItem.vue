@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 
 import PencilIcon from '~icons/tabler/Pencil'
 import TrashIcon from '~icons/tabler/Trash'
@@ -25,8 +25,13 @@ function handleSaveTodo() {
   todosStore.setContent(todo.id, textareaValue.value)
 }
 
-function handleEditTodo() {
+async function handleEditTodo() {
   isEdit.value = true
+
+  await nextTick()
+
+  // Обновление значения textarea, на случай если оно было изменено в store
+  textareaValue.value = todo.content
 }
 
 function handleEditButtonClick() {
