@@ -24,11 +24,11 @@ function handleSubmit() {
             v-model="inputValue"
             type="text"
             :placeholder="$t('controlsInputPlaceholder')"
-            class="input input-bordered grow"
+            class="input-bordered input grow"
             data-testId="controlsContentInput"
           />
           <button
-            class="btn btn-primary rounded-full"
+            class="btn-primary btn rounded-full"
             type="submit"
             :disabled="!isValid"
           >

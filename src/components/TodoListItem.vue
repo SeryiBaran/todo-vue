@@ -46,12 +46,12 @@ function handleToggleCompleted() {
 </script>
 
 <template>
-  <div class="card bg-base-200 w-full text-start shadow-md">
+  <div class="card w-full bg-base-200 text-start shadow-md">
     <div class="card-body gap-4">
       <textarea
         v-if="isEdit"
         v-model="textareaValue"
-        class="textarea textarea-bordered"
+        class="textarea-bordered textarea"
         :auto-resize="true"
       />
       <p
@@ -68,11 +68,11 @@ function handleToggleCompleted() {
             ref="isCompletedCheckbox"
             :checked="todo.completed"
             type="checkbox"
-            class="checkbox checkbox-primary h-12 w-12"
+            class="checkbox-primary checkbox h-12 w-12"
             @change="handleToggleCompleted()"
           />
           <button
-            class="btn btn-primary grow"
+            class="btn-primary btn grow"
             :class="{ 'btn-success': isEdit }"
             :disabled="!isValid"
             @click="handleEditButtonClick"
@@ -81,7 +81,7 @@ function handleToggleCompleted() {
             <SquareRoundedCheckIcon v-else class="buttonIcon" />
           </button>
           <button
-            class="btn btn-error grow"
+            class="btn-error btn grow"
             @click="todosStore.remove(todo.id)"
           >
             <TrashIcon class="buttonIcon" />
